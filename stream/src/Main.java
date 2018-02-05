@@ -8,9 +8,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        //스트림, 아주 기본적인 샘플 예제, 2018.2.4 Eddy
-
-
+        //스트림, 아주 기본적인 샘플 예제, 2018.2.4~2.5 Eddy
 
         System.out.println("#1.기본 예제");
 
@@ -37,7 +35,56 @@ public class Main {
             System.out.println(name + "의 가격은" + price);
         });
 
+        System.out.println();
+
+
+        System.out.println("#3.병렬 처리");
+        List<String> str = Arrays.asList("핫초코", "차이티라떼", "콜드블루", "아메리카노");
+        /*
+        Stream<String> stream03 = str.stream();
+        stream03.forEach(c -> System.out.println(c));
+        */
+        Stream<String> stream04 = str.parallelStream();
+        stream04.forEach(c -> System.out.println(c));
+
+
+
+        System.out.println();
+
+
+        System.out.println("#4.average");
+        Stream<Coffee> coffeeStream02 = coffees.stream();
+        double agePrice = coffeeStream02.mapToInt(Coffee :: getPrice).average().getAsDouble();
+        System.out.println("평균 가격은" + agePrice);
+
+
+
+        System.out.println();
+
+        System.out.println("#5.distinct, 중복제거");
+        List<String> str02 = Arrays.asList("핫초코", "차이티라떼", "콜드블루", "아메리카노", "핫초코", "아메리카노");
+        str02.stream()
+                .distinct()
+                .forEach(c -> System.out.println(c));
         
+        System.out.println();
+
+        System.out.println("#6.filter, 필터링");
+        List<String> str03 = Arrays.asList("핫초코", "카페라떼", "차이티라떼", "콜드블루", "아메리카노", "핫초코", "아메리카노");
+        str03.stream()
+                .filter(c -> c.endsWith("라떼"))
+                .forEach(c -> System.out.println(c));
+
+
+
+
+
+
+
+
+
+
+
 
 
 
