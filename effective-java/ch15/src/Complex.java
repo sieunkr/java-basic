@@ -1,4 +1,5 @@
 public final class Complex {
+    //계승을 금지하기 위해 final 로 선언
     private final double re;
     private final double im;
 
@@ -20,6 +21,7 @@ public final class Complex {
     public static final Complex I = new Complex(0, 1);
 
     // Accessors with no corresponding mutators
+    //대응되는 수정자가 없는 접근자들
     public double realPart() {
         return re;
     }
