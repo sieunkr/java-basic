@@ -1,7 +1,12 @@
 # Generic(제네릭)
 Generic에 대해서 기초적인 내용을 정리한다.
 
-### Generic이란?
+1. Generic 이란?
+2. 멀티 타입 파라미터
+3. Generic 메서드
+
+
+### 1.Generic이란?
 타입을 파라미터로 가지는 클래스 또는 인터페이스이다. <> 부호가 붙고, 사이에 파라미터가 위치한다.  
 Generic를 사용하면 잘못된 타입이 사용될 수 있는 문제를 컴파일 과정에서 제거할 수 있다.
 
@@ -21,4 +26,86 @@ List<String> list = new ArrayList<String>();
 list.add("안녕");
 String str = list.get(0);
 System.out.println(str);
+```
+
+타입 파라미터는 일반적으로 한 글자로 작성한다. 
+
+```java
+public class 클래스<T> { ... }
+public interface 인터페이스<T> { ... }
+```
+
+### 2.멀티 타입 파라미터
+Generic 타입은 두 개 이상의 멀티 타입 파라미터를 사용할 수 있다. 
+
+```java
+public class Coffee<B, P> {  
+	private B brand;  
+	private P price;  
+  
+	public B getBrand() {  
+	    return brand;  
+	}  
+  
+	public void setBrand(B brand) {  
+		this.brand = brand;  
+	}  
+
+	public P getPrice() {  
+		return price;  
+	}  
+
+	public void setPrice(P price) {  
+		this.price = price;  
+	}  
+}
+```
+
+### 3.Generic 메서드
+
+제네릭 메서드는 매개 타입과 리턴 타입으로 타입 파라미터를 갖는다.
+```java
+public <타입파라미터> 리턴타입 메서드명(매개변수) { ... }
+```
+다음 take() 메서드는 T 라는 타입파라미터를 기술하여, 매개 변수 타입으로 T를 사용하고, 리턴 타입은 Coffee<T> 를 사용한다.
+```java
+public <T> Coffee<T> take(T t) {...}
+```
+Coffee() 메서드를 호출하는 코드이다.
+```java
+Coffee<String> coffee = <String>take("모카");
+Coffee<String> coffee = take("모카"); //타입 파라미터를 String 으로 추정
+```
+
+다음 예제는 take() 메서드를 호출하는 코드이다.
+```java
+//Coffee.java
+public class Coffee<T> {  
+    private T t;  
+  
+	public T getT() {  
+	    return t;  
+	}  
+
+	public void setT(T t) {  
+	    this.t = t;  
+	}  
+}
+```
+
+```java
+//Util.java
+public class Util {  
+	public static <T> Coffee<T> take(T t){  
+	    Coffee<T> coffee = new Coffee<T>();  
+		coffee.setT(t);  
+		return coffee;  
+	}  
+}
+```
+
+```java
+//main.java
+Coffee<String> coffee = Util.<String>take("모카");  
+System.out.println(coffee.getT());
 ```
