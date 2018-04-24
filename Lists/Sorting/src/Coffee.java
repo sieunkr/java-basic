@@ -24,10 +24,12 @@ public class Coffee implements Comparable<Coffee> {
 public class Coffee{
 
     public final Long id;
+    public final Integer price;
     public final String name;
 
-    public Coffee(Long id, String name) {
+    public Coffee(Long id,Integer price, String name) {
         this.id = id;
+        this.price = price;
         this.name = name;
     }
 }
