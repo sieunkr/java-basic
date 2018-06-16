@@ -6,9 +6,25 @@ import java.rmi.server.ExportException;
 public class Main {
 
     public static void main(String[] args) throws IOException{
-        //Java 8 in Action 을 공부하면서 작성한 코드 정리 - 2018.01.31
+        //이것이 자바다, Java 8 in Action 을 공부하면서 작성한 코드 정리 - 2018.01.31
 
-        Runnable r1 = () -> System.out.println("1.람다, Runnable");
+        FuntionalAction fi;
+
+        fi = () -> {
+            String str = "method call";
+            System.out.println(str);
+        };
+        fi.action();
+
+        fi = () -> { System.out.println("method call2");};
+        fi.action();
+
+        fi = () -> System.out.println("method call3");
+        fi.action();
+
+        
+        /*
+        Runnable r1 = () -> System.out.println("1.Lamda, Runnable");
         r1.run();
 
         Runnable r2 = new Runnable() {
@@ -44,9 +60,9 @@ public class Main {
 
 
 
-        String oneLine = processString((FileInputStream f) -> f.read());
-        System.out.println("7." + oneLine);
-
+        //String oneLine = processString((FileInputStream f) -> f.read());
+        //System.out.println("7." + oneLine);
+        */
     }
 
     public static String processString(FunctionActionProcessor p) throws IOException{
@@ -58,7 +74,4 @@ public class Main {
     public interface FunctionActionProcessor {
         public String action(FileInputStream f) throws IOException;
     }
-
-
-
 }
