@@ -109,3 +109,63 @@ public class Util {
 Coffee<String> coffee = Util.<String>take("모카");  
 System.out.println(coffee.getT());
 ```
+
+
+### 4.제한된 타입 파라미터(T extends 상위타입)
+
+타입 파라미터에 구체적인 타입을 제한하는 경우 사용한다. 
+
+````java
+public <T extends 상위타입> 리턴타입 메서드(매개변수,..) { .. }
+````
+
+상위 타입은 클래스, 인터페이스 둘다 가능하다. 
+
+#### 샘플 코드
+````java
+public class Util {
+
+    public static <T extends Number> int sum(T t1, T t2){
+        Integer value01 = t1.intValue();
+        Integer value02 = t2.intValue();
+        return value01 + value02;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        System.out.println(Util.<Integer>sum(10, 15));
+        System.out.println(Util.<Double>sum(12.5, 14.7));
+    }
+}
+````
+
+
+### 5.와일드 카드
+
+- <?>
+- <? extends 상위타입>
+- <? super 하위타입>
+
+
+### 6.<> 다이아몬드(?)
+
+````java
+List<String> list = new LinkedList<String>();
+
+자바7 이상부터는 타입파라미터 생략 가능
+List<String> list = new LinkedList<>();
+````
+
+단, 익명 클래스에서 제네릭을 사용하는 경우에는 타입 파라미터를 꼭 추가해야 한다. 
+
+````java
+Comparator<String> caseInsensitiveComparator = new Comparator<String>() {
+ @Override
+ public int compare(String s1, String s2) {
+ return s1.compareToIgnoreCase(s2);
+ }
+};
+````
+
+
